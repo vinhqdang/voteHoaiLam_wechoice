@@ -1,5 +1,7 @@
 I wrote this small application to help fan club of Hoai Lam to auto vote for him at wechoice.vn
 
+## If you are using Windows, you need to download ChromeDriver for Windows at http://chromedriver.storage.googleapis.com/2.14/chromedriver_win32.zip and put the extracted file in the same directory with two JAR files.
+
 # How to use
 0. You need to install JAVA runtime in your computer. If you don't know how to, Google is ready to help.
 
