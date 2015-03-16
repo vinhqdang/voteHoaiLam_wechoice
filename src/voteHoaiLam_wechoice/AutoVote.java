@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 public class AutoVote { 
 	private static BufferedReader bufferedReader;
 	private static BufferedReader configBufferedReader;
@@ -22,6 +21,11 @@ public class AutoVote {
 	private static String configName;
 
 	public static void main(String[] args) throws InterruptedException, IOException {
+		
+		if (OSValidator.isWindows()) {
+			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		}
+		
 		File config_file = new File ("config.txt");
 		FileReader configReader = new FileReader (config_file);
 		configBufferedReader = new BufferedReader(configReader);

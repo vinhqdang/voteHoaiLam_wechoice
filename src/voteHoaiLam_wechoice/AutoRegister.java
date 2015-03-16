@@ -2,7 +2,6 @@ package voteHoaiLam_wechoice;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 public class AutoRegister { 
 	private static BufferedReader configBufferedReader;
 	private static String configLine;
@@ -21,6 +19,11 @@ public class AutoRegister {
 	private static String configName;
 	
 	public static void main(String[] args) throws IOException {
+		
+		if (OSValidator.isWindows()) {
+			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+		}
+		
 		File config_file = new File ("config.txt");
 		FileReader configReader = new FileReader (config_file);
 		configBufferedReader = new BufferedReader(configReader);
