@@ -14,7 +14,28 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class AutoRegister { 
+	private static BufferedReader configBufferedReader;
+	private static String configLine;
+	private static int configTimeout;
+	private static String configPassword;
+	private static String configName;
+	
 	public static void main(String[] args) throws IOException {
+		File config_file = new File ("config.txt");
+		FileReader configReader = new FileReader (config_file);
+		configBufferedReader = new BufferedReader(configReader);
+		while ((configLine = configBufferedReader.readLine()) != null) {
+			String[] lines = configLine.split("=");
+			if (lines[0].compareTo("password") == 0) {
+				configPassword = lines [1];
+			}
+			if (lines[0].compareTo("timeout") == 0) {
+				configTimeout = Integer.parseInt(lines [1]);
+			}
+			if (lines[0].compareTo("name") == 0) {
+				configName = lines [1];
+			}
+		}
 		
 		File file = new File("email.txt");
 		FileReader fileReader = new FileReader(file);
@@ -23,7 +44,7 @@ public class AutoRegister {
 		while ((line = bufferedReader.readLine()) != null) {
 			WebDriver driver = new ChromeDriver();
 			// TODO Auto-generated method stub
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(configTimeout, TimeUnit.SECONDS);
 			driver.get("http://vietid.net");
 			WebElement email_addr = driver.findElement(By.id("email"));
 			WebElement password1 = driver.findElement(By.id("password"));
@@ -31,9 +52,9 @@ public class AutoRegister {
 			WebElement full_name = driver.findElement(By.id("fullname"));
 			
 			email_addr.sendKeys(line);
-			password1.sendKeys("123456");
-			password2.sendKeys("123456");
-			full_name.sendKeys("ABC XYZ DEF");
+			password1.sendKeys(configPassword);
+			password2.sendKeys(configPassword);
+			full_name.sendKeys(configName);
 			
 			WebElement register_button = driver.findElement(By.id("register_vietid"));
 			register_button.click();
