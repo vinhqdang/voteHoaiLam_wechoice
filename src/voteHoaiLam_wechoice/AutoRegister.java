@@ -19,7 +19,7 @@ public class AutoRegister {
 	private static String configName;
 	private static int waitTime;
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		if (OSValidator.isWindows()) {
 			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
