@@ -17,6 +17,7 @@ public class AutoRegister {
 	private static int configTimeout;
 	private static String configPassword;
 	private static String configName;
+	private static int waitTime;
 	
 	public static void main(String[] args) throws IOException {
 		
@@ -37,6 +38,9 @@ public class AutoRegister {
 			}
 			if (lines[0].compareTo("name") == 0) {
 				configName = lines [1];
+			}
+			if (lines[0].compareTo("wait") == 0) {
+				waitTime = Integer.parseInt(lines [1]);
 			}
 		}
 		
@@ -63,6 +67,8 @@ public class AutoRegister {
 			register_button.click();
 			
 			driver.quit();
+			
+			Thread.sleep(waitTime * 1000);
 		}
 		fileReader.close();
 		

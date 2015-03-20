@@ -19,6 +19,7 @@ public class AutoVote {
 	private static int configTimeout;
 	private static String configPassword;
 	private static String configName;
+	private static int waitTime;	//time to wait to vote again
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		
@@ -39,6 +40,9 @@ public class AutoVote {
 			}
 			if (lines[0].compareTo("name") == 0) {
 				configName = lines [1];
+			}
+			if (lines[0].compareTo("wait") == 0) {
+				waitTime = Integer.parseInt(lines [1]);
 			}
 		}
 		
@@ -65,7 +69,7 @@ public class AutoVote {
 			WebElement vote_button = driver.findElement(By.xpath("//*[@id=\"WrapperTag\"]/div[2]/div[4]/div[2]/div[2]/ul/li[1]/div/div"));
 			vote_button.click();
 
-			Thread.sleep (3000);
+			Thread.sleep (waitTime * 1000);
 
 			driver.quit();
 		}
